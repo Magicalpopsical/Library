@@ -487,7 +487,7 @@ namespace com.Magicalpopsical {
             SpriteFont font;
             private int width, height, tileSize;
             private static ContentManager content;
-            int levelCounter = 1;
+            int levelCounter = 0;
             #endregion
 
             #region Properties
@@ -530,7 +530,6 @@ namespace com.Magicalpopsical {
                 Dimensions = inDim;
                 game = inGame;
                 font = inFont;
-                LoadLevel();
             }
 
             /// <summary>
