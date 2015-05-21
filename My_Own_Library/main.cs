@@ -9,7 +9,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-
 namespace com.Magicalpopsical {
     namespace TwoDimentional {
         public interface IDimensions {
@@ -33,8 +32,24 @@ namespace com.Magicalpopsical {
         }
 
         public class BaseSprite {
+            #region Fields
             protected Texture2D spriteTexture;
-            protected Rectangle spriteRectangle;
+            protected Rectangle spriteRectangle; 
+            #endregion
+
+            #region Properties
+            public Rectangle SpriteRectangle { get { return spriteRectangle; } } 
+            #endregion
+
+            /// <summary>
+            /// Creates base sprites
+            /// </summary>
+            /// <param name="inSpriteTexture">Texture of the sprite</param>
+            /// <param name="inRectangle">Rectangle of the sprite</param>
+            public BaseSprite(Texture2D inSpriteTexture, Rectangle inRectangle) {
+                LoadTexture(inSpriteTexture);
+                SetRectangle(inRectangle);
+            }
 
             /// <summary>
             /// Loads the texture to be used in the sprite.
@@ -81,15 +96,20 @@ namespace com.Magicalpopsical {
             /// <param name="game">Game to be controlled.</param>
             public virtual void Update(ISpriteBasedGame game) {
             }
-
-            public BaseSprite(Texture2D inSpriteTexture, Rectangle inRectangle) {
-                LoadTexture(inSpriteTexture);
-                SetRectangle(inRectangle);
-            }
-
         }
 
         public class TitleSprite : BaseSprite {
+
+            public TitleSprite(Texture2D inSpriteTexture, Rectangle inRectangle)
+                : base(inSpriteTexture, inRectangle) {
+            }
+
+            public TitleSprite(Texture2D inSpriteTexture, IDimensions inDimensions)
+                : base(inSpriteTexture,
+                    new Rectangle((int)inDimensions.minDisplayX, (int)inDimensions.minDisplayY, (int)(inDimensions.maxDisplayX - inDimensions.minDisplayX), (int)(inDimensions.maxDisplayY - inDimensions.minDisplayY))) {
+
+            }
+
             /// <summary>
             /// Update behavior for the title. The A button is tested and the game
             /// is started if it is pressed.
@@ -100,52 +120,44 @@ namespace com.Magicalpopsical {
                     game.StartGame();
                 }
             }
-
-            public TitleSprite(Texture2D inSpriteTexture, Rectangle inRectangle)
-                : base(inSpriteTexture, inRectangle) {
-            }
-
-            public TitleSprite(Texture2D inSpriteTexture, IDimensions inDimensions)
-                : base(inSpriteTexture,
-                    new Rectangle((int)inDimensions.minDisplayX, (int)inDimensions.minDisplayY, (int)(inDimensions.maxDisplayX - inDimensions.minDisplayX), (int)(inDimensions.maxDisplayY - inDimensions.minDisplayY))) {
-            }
         }
 
         public class MovingSprite : BaseSprite {
-            protected float x;
-            protected float y;
-            protected float xSpeed;
-            protected float ySpeed;
+            #region Fields
+            protected float x, y, xSpeed, ySpeed;
+            protected float initialX, initialY;
+            protected float minDisplayX, maxDisplayX, minDisplayY, maxDisplayY; 
+            #endregion
 
-            protected float initialX;
-            protected float initialY;
+            #region Properties
+            public float XPos { get { return x; } }
+            public float YPos { get { return y; } } 
+            #endregion
 
-            protected float minDisplayX;
-            protected float maxDisplayX;
-
-            protected float minDisplayY;
-            protected float maxDisplayY;
-
-            public float XPos {
-                get {
-                    return x;
-                }
-            }
-
-            public float YPos {
-                get {
-                    return y;
-                }
-            }
 
             /// <summary>
-            /// Check for collisions between the sprite and other objects.
+            /// Creates a moving sprite
             /// </summary>
-            /// <param name="target">Rectangle giving the position of the other object.</param>
-            /// <returns>true if the target has collided with this object</returns>
-            public virtual bool CheckCollision(Rectangle target) {
-                return spriteRectangle.Intersects(target);
+            /// <param name="spriteTexture">Texture to use for the sprite</param>
+            /// <param name="ticksToCrossScreen">Speed of movement, in number of 60th of a second ticks to 
+            /// cross the entire screen.</param>
+            /// <param name="minDisplayX">minimum X value</param>
+            /// <param name="maxDisplayX">maximum X value</param>
+            /// <param name="minDisplayY">minimum Y value</param>
+            /// <param name="maxDisplayY">maximum Y value</param>
+            /// <param name="initialX">start X position for the sprite</param>
+            /// <param name="initialY">start Y position for the sprite</param>
+            public MovingSprite(Texture2D inSpriteTexture, float ticksToCrossScreen, float inInitialX, float inInitialY, IDimensions inDimensions)
+                : base(inSpriteTexture, Rectangle.Empty) {
+                initialX = inInitialX;
+                initialY = inInitialY;
+                x = initialX;
+                y = initialY;
+                float displayWidth = maxDisplayX - minDisplayX;
+                xSpeed = displayWidth / ticksToCrossScreen;
+                ySpeed = xSpeed;
             }
+
 
             /// <summary>
             /// Creates a moving sprite
@@ -161,13 +173,7 @@ namespace com.Magicalpopsical {
             /// <param name="maxDisplayY">maximum Y value</param>
             /// <param name="initialX">start X position for the sprite</param>
             /// <param name="initialY">start Y position for the sprite</param>
-            public MovingSprite(
-                Texture2D inSpriteTexture,
-                float widthFactor,
-                float ticksToCrossScreen,
-                IDimensions inDimensions,
-                float inInitialX,
-                float inInitialY)
+            public MovingSprite(Texture2D inSpriteTexture, float widthFactor, float ticksToCrossScreen, float inInitialX, float inInitialY, IDimensions inDimensions)
                 : base(inSpriteTexture, Rectangle.Empty) {
                 minDisplayX = inDimensions.minDisplayX;
                 minDisplayY = inDimensions.minDisplayY;
@@ -190,6 +196,15 @@ namespace com.Magicalpopsical {
                 ySpeed = xSpeed;
             }
 
+            /// <summary>
+            /// Check for collisions between the sprite and other objects.
+            /// </summary>
+            /// <param name="target">Rectangle giving the position of the other object.</param>
+            /// <returns>true if the target has collided with this object</returns>
+            public virtual bool CheckCollision(Rectangle target) {
+                return spriteRectangle.Intersects(target);
+            }
+
             public override void Draw(SpriteBatch spriteBatch) {
                 base.Draw(spriteBatch);
             }
@@ -207,30 +222,14 @@ namespace com.Magicalpopsical {
                 spriteRectangle.Y = (int)y;
                 base.StartGame();
             }
-
-            public Rectangle SpriteRectangle { get { return spriteRectangle; } }
-
-            public MovingSprite(Texture2D inSpriteTexture,
-                float ticksToCrossScreen,
-                IDimensions inDimensions,
-                float inInitialX, float inInitialY)
-                : base(inSpriteTexture, Rectangle.Empty) {
-                initialX = inInitialX;
-                initialY = inInitialY;
-                x = initialX;
-                y = initialY;
-                float displayWidth = maxDisplayX - minDisplayX;
-                xSpeed = displayWidth / ticksToCrossScreen;
-                ySpeed = xSpeed;
-            }
         }
 
         public class AnimatedSprite : MovingSprite {
+            #region Fields
             /// <summary>
             /// Source rectangle to take out of the sprite texture
             /// </summary>
             private Rectangle sourceRect;
-
             /// <summary>
             /// Width of one frame in the animation
             /// </summary>
@@ -239,13 +238,21 @@ namespace com.Magicalpopsical {
             /// Height of one frame in the animation
             /// </summary>
             private int frameHeight;
-
             /// <summary>
             /// Counts the updates
             /// When it reaches 5 it is time to update the frames
             /// </summary>
             protected int updateTickCounter = 0;
             protected int updateClock;
+            /// <summary>
+            /// Number of the row currently selected for the display
+            /// </summary>
+            private int rowNumber; 
+            #endregion
+
+            #region Properties
+            public int RowNumber { get { return rowNumber; } } 
+            #endregion
 
             /// <summary>
             /// Creates a new animated sprite.
@@ -261,16 +268,8 @@ namespace com.Magicalpopsical {
             /// <param name="initialY">Initial Y position of sprite</param>
             /// <param name="inFrameWidth">width of each frame of the animation</param>
             /// <param name="inFrameHeight">height of each frame of the animation</param>
-            public AnimatedSprite(
-                Texture2D inSpriteTexture,
-                float widthFactor, float ticksToCrossScreen,
-                IDimensions inDimensions,
-                float initialX, float initialY,
-                int inFrameWidth, int inFrameHeight,
-                int inUpdateClock = 5)
-                : base(
-                    inSpriteTexture, widthFactor,
-                    ticksToCrossScreen, inDimensions, initialX, initialY) {
+            public AnimatedSprite(Texture2D inSpriteTexture, float widthFactor, float ticksToCrossScreen, float initialX, float initialY, int inFrameWidth, int inFrameHeight, IDimensions inDimensions, int inUpdateClock = 5)
+                : base(inSpriteTexture, widthFactor, ticksToCrossScreen, initialX, initialY, inDimensions) {
                 frameWidth = inFrameWidth;
                 frameHeight = inFrameHeight;
                 sourceRect = new Rectangle(0, 0, inFrameWidth, inFrameHeight);
@@ -282,13 +281,8 @@ namespace com.Magicalpopsical {
                 spriteRectangle.Height = (int)((spriteRectangle.Width / aspectRatio) + 0.5f);
             }
 
-            public AnimatedSprite(Texture2D inSpriteTexture,
-                float ticksToCrossScreen,
-                IDimensions inDimensions,
-                float initialX, float initialY,
-                int inFrameWidth, int inFrameHeight,
-                int inUpdateClock = 5)
-                : base(inSpriteTexture, ticksToCrossScreen, inDimensions, initialX, initialY) {
+            public AnimatedSprite(Texture2D inSpriteTexture, float ticksToCrossScreen, float initialX, float initialY, int inFrameWidth, int inFrameHeight, IDimensions inDimensions, int inUpdateClock = 5)
+                : base(inSpriteTexture, ticksToCrossScreen, initialX, initialY, inDimensions) {
                 frameWidth = inFrameWidth;
                 frameHeight = inFrameHeight;
                 sourceRect = new Rectangle(0, 0, inFrameWidth, inFrameHeight);
@@ -313,27 +307,14 @@ namespace com.Magicalpopsical {
             }
 
             /// <summary>
-            /// Number of the row currently selected for the display
-            /// </summary>
-            private int rowNumber;
-
-            /// <summary>
-            /// Gets the currently active row on the display
-            /// </summary>
-            /// <returns>The currently displayed row on the texture</returns>
-            public int getRowNumber() {
-                return rowNumber;
-            }
-
-            /// <summary>
             /// Selects a particular display row on the texture.
             /// </summary>
-            /// <param name="newRowNuumber">Number of the new row. The row at 
+            /// <param name="newRowNumber">Number of the new row. The row at 
             /// the top is number 0</param>
             /// <returns>true if the row was set correctly, 
             /// false if the source texture does not contain that row</returns>
-            public bool SetRow(int newRowNuumber) {
-                int rowY = newRowNuumber * frameHeight;
+            public bool SetRow(int newRowNumber) {
+                int rowY = newRowNumber * frameHeight;
 
                 if (rowY + frameHeight > spriteTexture.Height) {
                     // This row does not exist
@@ -341,7 +322,7 @@ namespace com.Magicalpopsical {
                 }
 
                 sourceRect.Y = rowY;
-                rowNumber = newRowNuumber;
+                rowNumber = newRowNumber;
                 return true;
             }
 
@@ -367,12 +348,18 @@ namespace com.Magicalpopsical {
         }
 
         public class ExplodingSprite : AnimatedSprite {
+            #region Fields
             private Texture2D explodeTexture;
             private Rectangle explodeSourceRect;
             private int explodeFrameWidth;
             private int explodeTickCounter;
             private bool exploding;
-            private SoundEffect explodeSound;
+            private SoundEffect explodeSound; 
+            #endregion
+
+            #region Properties
+            public bool IsExploding { get { return exploding; } } 
+            #endregion
 
             /// <summary>
             /// Creates a new animated sprite.
@@ -391,21 +378,8 @@ namespace com.Magicalpopsical {
             /// <param name="inExplodeTexture">texture for the explosion</param>
             /// <param name="inExplodeFrameWidth">width of frame in explosion animation</param>
             /// <param name="inExplodeSound">sound to play when the sprite explodes</param>
-            public ExplodingSprite(
-                Texture2D inSpriteTexture,
-                float widthFactor, float ticksToCrossScreen,
-                IDimensions inDimensions,
-                float initialX, float initialY,
-                int inFrameWidth, int inFrameHeight,
-                Texture2D inExplodeTexture,
-                int inExplodeFrameWidth,
-                SoundEffect inExplodeSound,
-                int inUpdateClock = 5)
-                : base(
-                    inSpriteTexture, widthFactor,
-                    ticksToCrossScreen, inDimensions,
-                    initialX, initialY,
-                    inFrameWidth, inFrameHeight, inUpdateClock) {
+            public ExplodingSprite(Texture2D inSpriteTexture, float widthFactor, float ticksToCrossScreen, float initialX, float initialY, int inFrameWidth, int inFrameHeight, Texture2D inExplodeTexture, int inExplodeFrameWidth, SoundEffect inExplodeSound, IDimensions inDimensions, int inUpdateClock = 5)
+                : base(inSpriteTexture, widthFactor, ticksToCrossScreen, initialX, initialY, inFrameWidth, inFrameHeight, inDimensions, inUpdateClock) {
                 explodeTexture = inExplodeTexture;
                 explodeFrameWidth = inExplodeFrameWidth;
                 explodeSourceRect = new Rectangle(
@@ -447,8 +421,6 @@ namespace com.Magicalpopsical {
                 }
             }
 
-            public bool IsExploding { get { return exploding; } }
-
             public void Explode() {
                 if (exploding) {
                     return;
@@ -466,71 +438,6 @@ namespace com.Magicalpopsical {
                 exploding = true;
             }
         }
-
-        public class PowerUpSprite : AnimatedSprite {
-            protected double pickUpTime;
-            protected bool active;
-            protected int numberOfPowerUps;
-
-            public bool isActive() { return active; }
-            public int getRemainingPowerUps() { return numberOfPowerUps; }
-
-            public PowerUpSprite(
-            Texture2D inSpriteTexture,
-            float widthFactor,
-                IDimensions inDimensions,
-            int inFrameWidth, int inFrameHeight)
-                : base(
-                    inSpriteTexture, widthFactor,
-                    0, inDimensions, inDimensions.minDisplayX, inDimensions.minDisplayY,
-                    inFrameWidth, inFrameHeight) {
-            }
-
-            /// <summary>
-            /// Activates the power up
-            /// </summary>
-            /// <param name="time">time at which it was activated</param>
-            public virtual bool ActivatePowerUp(GameTime time) {
-                if (numberOfPowerUps > 0) {
-                    active = true;
-                    pickUpTime = time.TotalGameTime.TotalMilliseconds;
-                    numberOfPowerUps--;
-                    return true;
-                }
-                return false;
-            }
-
-            /// <summary>
-            /// Different update method that accepts the current time to check if power up is no longer active
-            /// </summary>
-            /// <param name="game"></param>
-            /// <param name="curTime"></param>
-            public virtual void Update(ISpriteBasedGame game, GameTime curTime) {
-                if (curTime.TotalGameTime.TotalMilliseconds - pickUpTime >= 5000) {
-                    active = false;
-                }
-                base.Update(game);
-            }
-
-            /// <summary>
-            /// Draws the power up only if it is currently active
-            /// </summary>
-            /// <param name="spriteBatch"></param>
-            public override void Draw(SpriteBatch spriteBatch) {
-                if (active) {
-                    base.Draw(spriteBatch);
-                }
-            }
-
-            /// <summary>
-            /// Called when the game is started or you pass the level
-            /// </summary>
-            public override void StartGame() {
-                active = false;
-                numberOfPowerUps++;
-                base.StartGame();
-            }
-        } 
         #endregion
 
         #region TileMapping
@@ -538,8 +445,10 @@ namespace com.Magicalpopsical {
         /// Interface that allows entities to check if they can move
         /// </summary>
         public interface IMapControls {
-            bool CheckMove(Rectangle target);
+            bool CheckPlayerMove(Rectangle target);
+            bool CheckAIMove(Rectangle original, Rectangle target);
             bool CheckAttack(Rectangle target);
+            void AddAttack(int xMod, int yMod);
         }
 
         public class Tile {
@@ -599,12 +508,20 @@ namespace com.Magicalpopsical {
             #endregion
 
             #region Interface Methods
-            public virtual bool CheckMove(Rectangle target) {
+            public virtual bool CheckPlayerMove(Rectangle target) {
+                return false;
+            }
+
+            public virtual bool CheckAIMove(Rectangle original, Rectangle target) {
                 return false;
             }
 
             public virtual bool CheckAttack(Rectangle target) {
                 return false;
+            }
+
+            public virtual void AddAttack(int xMod, int yMod) {
+
             }
             #endregion
 
