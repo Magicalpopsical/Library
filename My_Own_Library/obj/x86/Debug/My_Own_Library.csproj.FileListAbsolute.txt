@@ -1,0 +1,31 @@
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.pdb
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.dll
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.pdb
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library (1)\My_Own_Library\obj\x86\Debug\My_Own_Library.csprojResolveAssemblyReference.cache
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library (1)\My_Own_Library\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library (1)\My_Own_Library\obj\x86\Debug\My_Own_Library.dll
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library (1)\My_Own_Library\obj\x86\Debug\My_Own_Library.pdb
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library (1)\My_Own_Library\bin\x86\Debug\My_Own_Library.dll
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library (1)\My_Own_Library\bin\x86\Debug\My_Own_Library.pdb
+H:\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll
+H:\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.pdb
+H:\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.csprojResolveAssemblyReference.cache
+H:\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+H:\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.dll
+H:\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.pdb
+\\Wps2016\2016\2016K-Q\mcox122997$\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll
+\\Wps2016\2016\2016K-Q\mcox122997$\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.pdb
+\\Wps2016\2016\2016K-Q\mcox122997$\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+\\Wps2016\2016\2016K-Q\mcox122997$\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.dll
+\\Wps2016\2016\2016K-Q\mcox122997$\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.pdb
+\\Wps2016\2016\2016K-Q\mcox122997$\Programming\Game Programming\Final\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.csprojResolveAssemblyReference.cache
+H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll
+H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.pdb
+H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.dll
+H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.pdb
+H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.csprojResolveAssemblyReference.cache
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll.CodeAnalysisLog.xml
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll.lastcodeanalysissucceeded
