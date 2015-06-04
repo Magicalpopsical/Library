@@ -24,21 +24,23 @@ namespace com.Magicalpopsical {
             void UpdateScore(int update);
             int GetScore();
             //GamePadState GetGamePad();
+            MouseState GetMouseState();
             bool keyPressed(Keys curKey);
             bool keyReleased(Keys curKey);
             bool keyHeld(Keys curKey);
             void StartGame();
             void EndGame();
+            void ExitProgram();
         }
 
         public class BaseSprite {
             #region Fields
             protected Texture2D spriteTexture;
-            protected Rectangle spriteRectangle; 
+            protected Rectangle spriteRectangle;
             #endregion
 
             #region Properties
-            public Rectangle SpriteRectangle { get { return spriteRectangle; } } 
+            public Rectangle SpriteRectangle { get { return spriteRectangle; } }
             #endregion
 
             /// <summary>
@@ -99,6 +101,13 @@ namespace com.Magicalpopsical {
         }
 
         public class TitleSprite : BaseSprite {
+            #region Fields
+            List<ButtonSprite> ButtonList = new List<ButtonSprite>(); 
+            #endregion
+
+            #region Properties
+            public List<ButtonSprite> GetButtonList { get { return ButtonList; } }
+            #endregion
 
             public TitleSprite(Texture2D inSpriteTexture, Rectangle inRectangle)
                 : base(inSpriteTexture, inRectangle) {
@@ -110,14 +119,105 @@ namespace com.Magicalpopsical {
 
             }
 
-            /// <summary>
-            /// Update behavior for the title. The A button is tested and the game
-            /// is started if it is pressed.
-            /// </summary>
-            /// <param name="game">Game to be controlled.</param>
-            public override void Update(ISpriteBasedGame game) {
-                if (game.keyPressed(Keys.Enter)) {
+            public void Update() {
+                foreach (var button in ButtonList) {
+                    button.Update();
+                }
+            }
+
+            public override void Draw(SpriteBatch spriteBatch) {
+                base.Draw(spriteBatch);
+                foreach (var button in ButtonList) {
+                    button.Draw(spriteBatch);
+                }
+            }
+
+            public void AddButton(ButtonSprite newButton){
+                ButtonList.Add(newButton);
+            }
+        }
+
+        public class ButtonSprite : TitleSprite {
+            #region Fields
+            bool Clickable;
+            Color _HoverColor, _DefaultColor;
+            #endregion
+
+            #region Properties
+            public bool isClickable { get { return Clickable; } }
+            public Color HoverColor { get { return _HoverColor; } }
+            public Color DefaultColor { get { return _DefaultColor; } }
+            protected MouseState _MouseState { get { return game.GetMouseState(); } }
+            #endregion
+
+            #region Interfaces
+            protected ISpriteBasedGame game;
+            #endregion
+
+            public ButtonSprite(Texture2D inSpriteTexture, Rectangle inRectangle, Color inHoverColor, Color inDefaultColor, ISpriteBasedGame inGame, bool inClickable = true)
+                : base(inSpriteTexture, inRectangle) {
+                Clickable = inClickable;
+                _HoverColor = inHoverColor;
+                _DefaultColor = inDefaultColor;
+                inGame = game;
+            }
+
+            public bool isHovering(Vector2 MousePosition) {
+                return (MousePosition.X >= spriteRectangle.X &&
+                    MousePosition.Y >= spriteRectangle.Y &&
+                    MousePosition.X <= spriteRectangle.X + spriteRectangle.Width &&
+                    MousePosition.Y <= spriteRectangle.Y + spriteRectangle.Height);
+            }
+
+            public bool isHovering(MouseState inMouseState) {
+                return (isHovering(new Vector2(inMouseState.X, inMouseState.Y)));
+            }
+
+            public bool isHovering() {
+                return (isHovering(_MouseState));
+            }
+
+            public override void Draw(SpriteBatch spriteBatch) {
+                if (Clickable) {
+                    if (isHovering()) {
+                        spriteBatch.Draw(spriteTexture, spriteRectangle, HoverColor);
+                    }
+                    else {
+                        spriteBatch.Draw(spriteTexture, spriteRectangle, DefaultColor);
+                    }
+                }
+                else {
+                    spriteBatch.Draw(spriteTexture, spriteRectangle, DefaultColor);
+                }
+            }
+
+            public virtual void Update() {
+
+            }
+        }
+
+        public class StartButton : ButtonSprite {
+            public StartButton(Texture2D inSpriteTexture, Rectangle inRectangle, Color inHoverColor, Color inDefaultColor, ISpriteBasedGame inGame, bool inClickable = true)
+                : base(inSpriteTexture, inRectangle, inHoverColor, inDefaultColor, inGame, inClickable) {
+
+            }
+
+            public override void Update() {
+                if (isHovering() && _MouseState.LeftButton == ButtonState.Pressed && isClickable) {
                     game.StartGame();
+                }
+            }
+        }
+
+        public class ExitButton : ButtonSprite {
+            public ExitButton(Texture2D inSpriteTexture, Rectangle inRectangle, Color inHoverColor, Color inDefaultColor, ISpriteBasedGame inGame, bool inClickable = true)
+                : base(inSpriteTexture, inRectangle, inHoverColor, inDefaultColor, inGame, inClickable) {
+
+            }
+
+            public override void Update() {
+                if (isHovering() && _MouseState.LeftButton == ButtonState.Pressed && isClickable) {
+                    game.ExitProgram();
                 }
             }
         }
@@ -126,12 +226,12 @@ namespace com.Magicalpopsical {
             #region Fields
             protected float x, y, xSpeed, ySpeed;
             protected float initialX, initialY;
-            protected float minDisplayX, maxDisplayX, minDisplayY, maxDisplayY; 
+            protected float minDisplayX, maxDisplayX, minDisplayY, maxDisplayY;
             #endregion
 
             #region Properties
             public float XPos { get { return x; } }
-            public float YPos { get { return y; } } 
+            public float YPos { get { return y; } }
             #endregion
 
 
@@ -247,11 +347,11 @@ namespace com.Magicalpopsical {
             /// <summary>
             /// Number of the row currently selected for the display
             /// </summary>
-            private int rowNumber; 
+            private int rowNumber;
             #endregion
 
             #region Properties
-            public int RowNumber { get { return rowNumber; } } 
+            public int RowNumber { get { return rowNumber; } }
             #endregion
 
             /// <summary>
@@ -354,11 +454,11 @@ namespace com.Magicalpopsical {
             private int explodeFrameWidth;
             private int explodeTickCounter;
             private bool exploding;
-            private SoundEffect explodeSound; 
+            private SoundEffect explodeSound;
             #endregion
 
             #region Properties
-            public bool IsExploding { get { return exploding; } } 
+            public bool IsExploding { get { return exploding; } }
             #endregion
 
             /// <summary>
