@@ -27,5 +27,4 @@ H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj
 H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.dll
 H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.pdb
 H:\Programming\Game Programming\Final\Gauntlet\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.csprojResolveAssemblyReference.cache
-C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll.CodeAnalysisLog.xml
-C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll.lastcodeanalysissucceeded
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\obj\x86\Debug\My_Own_Library.csprojResolveAssemblyReference.cache
