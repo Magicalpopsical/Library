@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "My_Own_Library", "My_Own_Library\My_Own_Library.csproj", "{D444A162-9A7E-4964-AFC3-1AABD6330076}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomLibrary", "My_Own_Library\CustomLibrary.csproj", "{D444A162-9A7E-4964-AFC3-1AABD6330076}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
