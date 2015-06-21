@@ -1,6 +1,686 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 12.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="12.0">
+ <Namespaces>
+  <Namespace Name="com.Magicalpopsical.TwoDimentional">
+   <Messages>
+    <Message Id="com" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+     <Issue Name="Namespace" Certainty="85" Level="Error">Correct the casing of 'com' in namespace name 'com.Magicalpopsical.TwoDimentional' by changing it to 'Com'.</Issue>
+    </Message>
+    <Message Id="Dimentional" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+     <Issue Name="Namespace" Certainty="75" Level="CriticalWarning">Correct the spelling of 'Dimentional' in namespace name 'com.Magicalpopsical.TwoDimentional'.</Issue>
+    </Message>
+    <Message Id="Magicalpopsical" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+     <Issue Name="Namespace" Certainty="75" Level="CriticalWarning">Correct the spelling of 'Magicalpopsical' in namespace name 'com.Magicalpopsical.TwoDimentional'.</Issue>
+    </Message>
+   </Messages>
+  </Namespace>
+ </Namespaces>
+ <Targets>
+  <Target Name="C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\My_Own_Library.dll">
+   <Modules>
+    <Module Name="my_own_library.dll">
+     <Messages>
+      <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+       <Issue Name="NoStrongName" Certainty="95" Level="CriticalError">Sign 'My_Own_Library.dll' with a strong name key.</Issue>
+      </Message>
+      <Message TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+       <Issue Name="Assembly" Certainty="95" Level="Error">Remove the underscores from assembly name 'My_Own_Library.dll'.</Issue>
+      </Message>
+      <Message TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+       <Issue Certainty="95" Level="Error">Mark 'My_Own_Library.dll' with CLSCompliant(true) because it exposes externally visible types.</Issue>
+      </Message>
+     </Messages>
+     <Namespaces>
+      <Namespace Name="com.Magicalpopsical.TwoDimentional">
+       <Types>
+        <Type Name="AnimatedSprite" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Single,System.Single,System.Int32,System.Int32,com.Magicalpopsical.TwoDimentional.IDimensions,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="75" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="284">Replace method 'AnimatedSprite.AnimatedSprite(Texture2D, float, float, float, int, int, IDimensions, int)' with an overload that supplies all default arguments.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#.ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,com.Magicalpopsical.TwoDimentional.IDimensions,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="75" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="271">Replace method 'AnimatedSprite.AnimatedSprite(Texture2D, float, float, float, float, int, int, IDimensions, int)' with an overload that supplies all default arguments.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Rectangle)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="334">In externally visible method 'AnimatedSprite.Draw(SpriteBatch, Rectangle)', validate parameter 'spriteBatch' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch,System.Single,Microsoft.Xna.Framework.Graphics.SpriteEffects)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="338">In externally visible method 'AnimatedSprite.Draw(SpriteBatch, float, SpriteEffects)', validate parameter 'spriteBatch' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GetOrigin(Microsoft.Xna.Framework.Rectangle)" Kind="Method" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="342">'AnimatedSprite.GetOrigin(Rectangle)' appears to have no upstream public or protected callers.</Issue>
+            </Message>
+            <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="342">The 'this' parameter (or 'Me' in Visual Basic) of 'AnimatedSprite.GetOrigin(Rectangle)' is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#updateClock" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'AnimatedSprite.updateClock' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#updateTickCounter" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'AnimatedSprite.updateTickCounter' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="BaseSprite" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message TypeName="IdentifiersShouldDifferByMoreThanCase" Category="Microsoft.Naming" CheckId="CA1708" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+           <Issue Name="Member" Certainty="95" Level="Error">Change member names 'SpriteRectangle' and 'spriteRectangle' so that they differ by more than case.</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="89">In externally visible method 'BaseSprite.Draw(SpriteBatch)', validate parameter 'spriteBatch' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#EndGame()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="EndGame" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberShouldBeDiscreteTerm" Certainty="80" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="81">The compound word 'EndGame' in member name 'BaseSprite.EndGame()' exists as a discrete term. If your usage is intended to be single word, case it as 'Endgame' or strip the first token entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#spriteRectangle" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'BaseSprite.spriteRectangle' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#spriteTexture" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'BaseSprite.spriteTexture' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Camera2d" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Messages>
+          <Message Id="d" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+           <Issue Name="Type" Certainty="85" Level="Error">Correct the casing of 'd' in type name 'Camera2d' by changing it to 'D'.</Issue>
+          </Message>
+         </Messages>
+         <Members>
+          <Member Name="#getTransformation(Microsoft.Xna.Framework.Graphics.GraphicsDevice)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="get" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="700">Correct the casing of 'get' in member name 'Camera2d.getTransformation(GraphicsDevice)' by changing it to 'Get'.</Issue>
+            </Message>
+            <Message Id="gd" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="75" Level="CriticalWarning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="700">In method 'Camera2d.getTransformation(GraphicsDevice)', correct the spelling of 'gd' in parameter name 'gd' or remove it entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+            <Message Id="0" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="700">In externally visible method 'Camera2d.getTransformation(GraphicsDevice)', validate parameter 'gd' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#setFocus(com.Magicalpopsical.TwoDimentional.IFocusable)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="set" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="692">Correct the casing of 'set' in member name 'Camera2d.setFocus(IFocusable)' by changing it to 'Set'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ExplodingSprite" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Single,System.Single,System.Single,System.Int32,System.Int32,Microsoft.Xna.Framework.Graphics.Texture2D,System.Int32,Microsoft.Xna.Framework.Audio.SoundEffect,com.Magicalpopsical.TwoDimentional.IDimensions,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="75" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="381">Replace method 'ExplodingSprite.ExplodingSprite(Texture2D, float, float, float, float, int, int, Texture2D, int, SoundEffect, IDimensions, int)' with an overload that supplies all default arguments.</Issue>
+            </Message>
+            <Message Id="7" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="385">In externally visible method 'ExplodingSprite.ExplodingSprite(Texture2D, float, float, float, float, int, int, Texture2D, int, SoundEffect, IDimensions, int)', validate parameter 'inExplodeTexture' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="419">In externally visible method 'ExplodingSprite.Draw(SpriteBatch)', validate parameter 'spriteBatch' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Explode()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+             <Issue Certainty="95" Level="CriticalError" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="432">Modify 'ExplodingSprite.Explode()' to catch a more specific exception than 'Exception' or rethrow the exception.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="IDimensions" Kind="Interface" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#maxDisplayX" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="max" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'max' in member name 'IDimensions.maxDisplayX' by changing it to 'Max'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#maxDisplayY" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="max" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'max' in member name 'IDimensions.maxDisplayY' by changing it to 'Max'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#minDisplayX" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="min" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'min' in member name 'IDimensions.minDisplayX' by changing it to 'Min'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#minDisplayY" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="min" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'min' in member name 'IDimensions.minDisplayY' by changing it to 'Min'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="IFocusable" Kind="Interface" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#getPosition()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="get" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'get' in member name 'IFocusable.getPosition()' by changing it to 'Get'.</Issue>
+            </Message>
+            <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="Warning">Change 'IFocusable.getPosition()' to a property if appropriate.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="IMapControls" Kind="Interface" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#AddAttack(System.Int32,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="75" Level="CriticalWarning">In method 'IMapControls.AddAttack(int, int)', correct the spelling of 'x' in parameter name 'xMod' or remove it entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+            <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberParameter" Certainty="75" Level="CriticalWarning">In method 'IMapControls.AddAttack(int, int)', correct the spelling of 'y' in parameter name 'yMod' or remove it entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="ISpriteBasedGame" Kind="Interface" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#EndGame()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="EndGame" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberShouldBeDiscreteTerm" Certainty="80" Level="Error">The compound word 'EndGame' in member name 'ISpriteBasedGame.EndGame()' exists as a discrete term. If your usage is intended to be single word, case it as 'Endgame' or strip the first token entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GetScore()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="50" Level="Warning">Change 'ISpriteBasedGame.GetScore()' to a property if appropriate.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#keyHeld(Microsoft.Xna.Framework.Input.Keys)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="key" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'key' in member name 'ISpriteBasedGame.keyHeld(Keys)' by changing it to 'Key'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#keyPressed(Microsoft.Xna.Framework.Input.Keys)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="key" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'key' in member name 'ISpriteBasedGame.keyPressed(Keys)' by changing it to 'Key'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#keyReleased(Microsoft.Xna.Framework.Input.Keys)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="key" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="85" Level="Error">Correct the casing of 'key' in member name 'ISpriteBasedGame.keyReleased(Keys)' by changing it to 'Key'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="MovingSprite" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Single,System.Single,com.Magicalpopsical.TwoDimentional.IDimensions)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="inDimensions" TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="95" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="150">Parameter 'inDimensions' of 'MovingSprite.MovingSprite(Texture2D, float, float, float, IDimensions)' is never used. Remove the parameter or use it in the method body.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#.ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Single,System.Single,System.Single,com.Magicalpopsical.TwoDimentional.IDimensions)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="5" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="178">In externally visible method 'MovingSprite.MovingSprite(Texture2D, float, float, float, float, IDimensions)', validate parameter 'inDimensions' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#initialX" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.initialX' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#initialY" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.initialY' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#maxDisplayX" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.maxDisplayX' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#maxDisplayY" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.maxDisplayY' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#minDisplayX" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.minDisplayX' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#minDisplayY" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.minDisplayY' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#x" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.x' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+            <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberMoreMeaningfulName" Certainty="75" Level="CriticalWarning">Consider providing a more meaningful name than member name 'MovingSprite.x'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#XPos" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Pos" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="75" Level="CriticalWarning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="133">Correct the spelling of 'Pos' in member name 'MovingSprite.XPos' or remove it entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#xSpeed" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.xSpeed' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#y" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.y' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+            <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberMoreMeaningfulName" Certainty="75" Level="CriticalWarning">Consider providing a more meaningful name than member name 'MovingSprite.y'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#YPos" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="Pos" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="Member" Certainty="75" Level="CriticalWarning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="134">Correct the spelling of 'Pos' in member name 'MovingSprite.YPos' or remove it entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#ySpeed" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'MovingSprite.ySpeed' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="Tile" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Content" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="PropertiesShouldNotBeWriteOnly" Category="Microsoft.Design" CheckId="CA1044" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Name="MakeMoreAccessible" Certainty="95" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="467">Because the property getter for 'Tile.Content' is less visible than its setter, either increase the accessibility of its getter or decrease the accessibility of its setter.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="473">In externally visible method 'Tile.Draw(SpriteBatch)', validate parameter 'spriteBatch' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#spriteTexture" Kind="Field" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="90" Level="Error">Because field 'Tile.spriteTexture' is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="TileMap" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#colorData" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning">It appears that field 'TileMap.colorData' is never used or is only ever assigned to. Use this field or remove it.</Issue>
+            </Message>
+            <Message Id="Member" TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Certainty="25" Level="Warning">'TileMap.colorData' is a multidimensional array. Replace it with a jagged array if possible.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Content" Kind="Property" Static="True" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message TypeName="PropertiesShouldNotBeWriteOnly" Category="Microsoft.Design" CheckId="CA1044" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Name="MakeMoreAccessible" Certainty="95" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="498">Because the property getter for 'TileMap.Content' is less visible than its setter, either increase the accessibility of its getter or decrease the accessibility of its setter.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Dimensions" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning">It appears that field 'TileMap.Dimensions' is never used or is only ever assigned to. Use this field or remove it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#EndGame()" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="EndGame" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberShouldBeDiscreteTerm" Certainty="80" Level="Error" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="653">The compound word 'EndGame' in member name 'TileMap.EndGame()' exists as a discrete term. If your usage is intended to be single word, case it as 'Endgame' or strip the first token entirely if it represents any sort of Hungarian notation.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#font" Kind="Field" Static="False" Accessibility="Private" ExternallyVisible="False">
+           <Messages>
+            <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="NonBreaking">
+             <Issue Certainty="75" Level="Warning">It appears that field 'TileMap.font' is never used or is only ever assigned to. Use this field or remove it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#GetTileRectangle(System.Int32,System.Int32)" Kind="Method" Static="False" Accessibility="Family" ExternallyVisible="True">
+           <Messages>
+            <Message Id="x" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberParameterMoreMeaningfulName" Certainty="75" Level="CriticalWarning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="627">In method 'TileMap.GetTileRectangle(int, int)', consider providing a more meaningful name than parameter name 'x'.</Issue>
+            </Message>
+            <Message Id="y" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="Breaking">
+             <Issue Name="MemberParameterMoreMeaningfulName" Certainty="75" Level="CriticalWarning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="627">In method 'TileMap.GetTileRectangle(int, int)', consider providing a more meaningful name than parameter name 'y'.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+        <Type Name="TitleSprite" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#.ctor(Microsoft.Xna.Framework.Graphics.Texture2D,com.Magicalpopsical.TwoDimentional.IDimensions)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="1" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="107">In externally visible method 'TitleSprite.TitleSprite(Texture2D, IDimensions)', validate parameter 'inDimensions' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+          <Member Name="#Update(com.Magicalpopsical.TwoDimentional.ISpriteBasedGame)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Messages>
+            <Message Id="0" TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062" Status="Active" Created="2015-05-21 01:12:09Z" FixCategory="DependsOnFix">
+             <Issue Certainty="75" Level="Warning" Path="c:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library" File="main.cs" Line="119">In externally visible method 'TitleSprite.Update(ISpriteBasedGame)', validate parameter 'game' before using it.</Issue>
+            </Message>
+           </Messages>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
+   <Name>Assemblies should have valid strong names</Name>
+   <Description>Either the assembly has no strong name, an invalid one, or the strong name is valid only because of the computer configuration. The assembly should not be deployed in this state. The most common causes of this are: 1) The assembly's contents were modified after it was signed. 2) The signing process failed. 3) The assembly was delay-signed. 4) A registry key existed that allowed the check to pass (where it would not have otherwise).</Description>
+   <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182127.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="AvoidUncalledPrivateCode" Category="Microsoft.Performance" CheckId="CA1811">
+   <Name>Avoid uncalled private code</Name>
+   <Description>There is uncalled code that is not externally visible and is not a known runtime entry point. If this violation fires in error, please send a problem report to the Visual Studio Code Analysis team.</Description>
+   <Resolution Name="Default">{0} appears to have no upstream public or protected callers.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182264.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823">
+   <Name>Avoid unused private fields</Name>
+   <Description>Private fields were detected that do not appear to be accessed within the assembly. If this violation fires in error, please send a problem report to the Visual Studio Code Analysis team.</Description>
+   <Resolution Name="Default">It appears that field {0} is never used or is only ever assigned to. Use this field or remove it.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms245042.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702">
+   <Name>Compound words should be cased correctly</Name>
+   <Description>Avoid creating compound words from terms which exist in the dictionary as discrete terms. Do not create a compound word such as 'StopWatch' or 'PopUp'. These terms are recognized in the dictionary and should be cased as 'Stopwatch' and 'Popup'.</Description>
+   <Resolution Name="MemberShouldBeDiscreteTerm">The compound word '{0}' in member name {1} exists as a discrete term. If your usage is intended to be single word, case it as '{2}' or strip the first token entirely if it represents any sort of Hungarian notation.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb264474.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="80">Error</MessageLevel>
+   <File Name="namingrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="DefaultParametersShouldNotBeUsed" Category="Microsoft.Design" CheckId="CA1026">
+   <Name>Default parameters should not be used</Name>
+   <Description>Some programming languages do not support default parameters. Replace default parameters with method overloads that supply the default argument.</Description>
+   <Resolution Name="Default">Replace method {0} with an overload that supplies all default arguments.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182135.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Error</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotCatchGeneralExceptionTypes" Category="Microsoft.Design" CheckId="CA1031">
+   <Name>Do not catch general exception types</Name>
+   <Description>You should not catch Exception or SystemException. Catching generic exception types can hide run-time problems from the library user, and can complicate debugging. You should catch only those exceptions that you can handle gracefully.</Description>
+   <Resolution Name="Default">Modify {0} to catch a more specific exception than {1} or rethrow the exception.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182137.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">CriticalError</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="DoNotDeclareVisibleInstanceFields" Category="Microsoft.Design" CheckId="CA1051">
+   <Name>Do not declare visible instance fields</Name>
+   <Description>Instance fields that are visible outside of the type that declares them, limit your ability to change the implementation details for those data items. Use properties instead. They do not compromise usability or performance and they do provide flexibility in that they conceal the implementation details of the underlying data.</Description>
+   <Resolution Name="Default">Because field {0} is visible outside of its declaring type, change its accessibility to private and add a property, with the same accessibility as the field has currently, to provide access to it.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182141.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="90">Error</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709">
+   <Name>Identifiers should be cased correctly</Name>
+   <Description>Type, namespace, and member identifiers are Pascal-cased. Parameter identifiers are camel-cased. Two letter acronyms within these identifiers should be upper-cased, for example, use System.IO instead of System.Io. Acronyms of three or more letters should be Pascal-cased, for example, use System.Xml instead of System.XML. The pascal-casing convention capitalizes the first letter of each word, as in BackColor. The camel-casing convention formats the first letter of the first word in lowercase and capitalizes the first letter of all subsequent words, as in backgroundColor. Although it may be common practice for some two letter acronyms to not be fully capitalized, violations of this rule should not be excluded for this reason. For example, 'DbConnection', is common but incorrect; use DBConnection. A violation of this rule might be required for compatibility with existing, non-managed symbol schemes. In general, however, these symbols should not be visible outside the assembly that uses them.</Description>
+   <Resolution Name="Member">Correct the casing of '{0}' in member name {1} by changing it to '{2}'.</Resolution>
+   <Resolution Name="Namespace">Correct the casing of '{0}' in namespace name '{1}' by changing it to '{2}'.</Resolution>
+   <Resolution Name="Type">Correct the casing of '{0}' in type name {1} by changing it to '{2}'.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182240.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="85">Error</MessageLevel>
+   <File Name="namingrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704">
+   <Name>Identifiers should be spelled correctly</Name>
+   <Description>The individual words that make up an identifier should not be abbreviated and should be spelled correctly. If this rule generates a false positive on a term that should be recognized, add the word to the FxCop custom dictionary.</Description>
+   <Resolution Name="Member">Correct the spelling of '{0}' in member name {1} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+   <Resolution Name="MemberMoreMeaningfulName">Consider providing a more meaningful name than member name {0}.</Resolution>
+   <Resolution Name="MemberParameter">In method {0}, correct the spelling of '{1}' in parameter name {2} or remove it entirely if it represents any sort of Hungarian notation.</Resolution>
+   <Resolution Name="MemberParameterMoreMeaningfulName">In method {0}, consider providing a more meaningful name than parameter name {1}.</Resolution>
+   <Resolution Name="Namespace">Correct the spelling of '{0}' in namespace name '{1}'.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb264492.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">CriticalWarning</MessageLevel>
+   <File Name="namingrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldDifferByMoreThanCase" Category="Microsoft.Naming" CheckId="CA1708">
+   <Name>Identifiers should differ by more than case</Name>
+   <Description>Do not use names that require case sensitivity for uniqueness. Components must be fully usable from both case-sensitive and case-insensitive languages. Since case-insensitive languages cannot distinguish between two names within the same context that differ only by case, components must avoid this situation.</Description>
+   <Resolution Name="Member">Change member names {0} and '{1}' so that they differ by more than case.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182242.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="namingrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="IdentifiersShouldNotContainUnderscores" Category="Microsoft.Naming" CheckId="CA1707">
+   <Name>Identifiers should not contain underscores</Name>
+   <Description>Do not use underscores when specifying identifiers. Some generated Visual Studio identifiers for applications contain underscore characters. Underscore characters should generally be avoided in public identifiers.</Description>
+   <Resolution Name="Assembly">Remove the underscores from assembly name {0}.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182245.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="namingrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="MarkAssembliesWithClsCompliant" Category="Microsoft.Design" CheckId="CA1014">
+   <Name>Mark assemblies with CLSCompliantAttribute</Name>
+   <Description>Assemblies should explicitly state their CLS compliance using the CLSCompliant attribute. An assembly without this attribute is not CLS-compliant. Assemblies, modules, and types can be CLS-compliant even if some parts of the assembly, module, or type are not CLS-compliant. The following rules apply: 1) If the element is marked CLSCompliant, any noncompliant members must have the CLSCompliant attribute present with its argument set to false. 2) A comparable CLS-compliant alternative member must be supplied for each member that is not CLS-compliant.</Description>
+   <Resolution Name="Default">Mark {0} with CLSCompliant(true) because it exposes externally visible types.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182156.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
+   <Name>Mark members as static</Name>
+   <Description>Methods which do not access instance data or call instance methods can be marked as static (Shared in Visual Basic). After doing so, the compiler will emit non-virtual call sites to these members which will prevent a check at runtime for each call that ensures the current object pointer is non-null. This can result in a measurable performance gain for performance-sensitive code. In some cases, the failure to access the current object instance represents a correctness issue.</Description>
+   <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms245046.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="PreferJaggedArraysOverMultidimensional" Category="Microsoft.Performance" CheckId="CA1814">
+   <Name>Prefer jagged arrays over multidimensional</Name>
+   <Description>Multidimensional arrays can have a negative impact on performance. Use a jagged array if possible.</Description>
+   <Resolution Name="Default">{0} is a multidimensional array. Replace it with a jagged array if possible.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182277.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="25">Warning</MessageLevel>
+   <File Name="performancerules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="PropertiesShouldNotBeWriteOnly" Category="Microsoft.Design" CheckId="CA1044">
+   <Name>Properties should not be write only</Name>
+   <Description>Write-only properties usually indicate a flawed design.</Description>
+   <Resolution Name="MakeMoreAccessible">Because the property getter for {0} is less visible than its setter, either increase the accessibility of its getter or decrease the accessibility of its setter.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182165.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Error</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="ReviewUnusedParameters" Category="Microsoft.Usage" CheckId="CA1801">
+   <Name>Review unused parameters</Name>
+   <Description>Review parameters in non-virtual methods that are not used in the method body to ensure no correctness exists around failure to access them. Unused parameters incur maintenance and performance costs. Sometimes a violation of this rule can point to an implementation bug in the method (i.e. the parameter should actually have been used in the method body). Exclude warnings of this rule if the parameter has to exist because of backward compatibility.</Description>
+   <Resolution Name="Default">Parameter {0} of {1} is never used. Remove the parameter or use it in the method body.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182268.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="95">Warning</MessageLevel>
+   <File Name="usagerules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="UsePropertiesWhereAppropriate" Category="Microsoft.Design" CheckId="CA1024">
+   <Name>Use properties where appropriate</Name>
+   <Description>Properties should be used instead of Get/Set methods in most situations. Methods are preferable to properties in the following situations: the operation is a conversion, is expensive or has an observable side-effect; the order of execution is important; calling the member twice in succession creates different results; a member is static but returns a mutable value; or the member returns an array.</Description>
+   <Resolution Name="Default">Change {0} to a property if appropriate.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/ms182181.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="designrules.dll" Version="12.0.0.0" />
+  </Rule>
+  <Rule TypeName="Validate arguments of public methods" Category="Microsoft.Design" CheckId="CA1062">
+   <Name>Validate arguments of public methods</Name>
+   <Description>All reference arguments passed to externally visible methods should be checked against null (Nothing in VB). If appropriate, throw a System.ArgumentNullException when the argument is null.</Description>
+   <Resolution Name="Default">In externally visible method {0}, validate parameter '{1}' before using it.</Resolution>
+   <Owner>RuleOwner</Owner>
+   <Url>http://msdn.microsoft.com/library/ms182182.aspx</Url>
+   <Email />
+   <MessageLevel Certainty="75">Warning</MessageLevel>
+   <File Name="dataflowrules.dll" Version="12.0.0.0" />
+  </Rule>
+ </Rules>
  <Localized>
   <String Key="Category">Category</String>
   <String Key="Certainty">Certainty</String>
