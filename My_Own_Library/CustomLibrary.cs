@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-/// Version:1.1
+/// Version:1.1.1.0
 namespace com.Magicalpopsical {
     namespace TwoDimentional {
         public interface IDimensions {
@@ -103,7 +103,7 @@ namespace com.Magicalpopsical {
 
         public class TitleSprite : BaseSprite {
             #region Fields
-            List<ButtonSprite> ButtonList = new List<ButtonSprite>(); 
+            List<ButtonSprite> ButtonList = new List<ButtonSprite>();
             #endregion
 
             #region Properties
@@ -133,7 +133,7 @@ namespace com.Magicalpopsical {
                 }
             }
 
-            public void AddButton(ButtonSprite newButton){
+            public void AddButton(ButtonSprite newButton) {
                 ButtonList.Add(newButton);
             }
         }
@@ -805,6 +805,42 @@ namespace com.Magicalpopsical {
 
                 return transform;
             }
+        }
+        #endregion
+
+        #region FPS
+        public class FpsCounter {
+            static GameTime _gameTime;
+            float Fps = 0f;
+            private const int NumberSamples = 50;
+            int[] Samples = new int[NumberSamples];
+            int CurrentSample = 0, TicksAggregate = 0, SecondSinceStart = 0;
+
+            public static GameTime gameTime { set { _gameTime = value; } get { return _gameTime; } }
+
+            private float Sum(int[] Samples) {
+                float RetVal = 0f;
+                for (int i = 0; i < Samples.Length; i++) {
+                    RetVal += (float)Samples[i];
+                }
+                return RetVal;
+            }
+
+            public void DrawCall() {
+                Samples[CurrentSample++] = (int)_gameTime.ElapsedGameTime.Ticks;
+                TicksAggregate += (int)_gameTime.ElapsedGameTime.Ticks;
+                if (TicksAggregate > TimeSpan.TicksPerSecond) {
+                    TicksAggregate -= (int)TimeSpan.TicksPerSecond;
+                    SecondSinceStart += 1;
+                }
+                if (CurrentSample == NumberSamples) {
+                    float AverageFrameTime = Sum(Samples) / NumberSamples;
+                    Fps = TimeSpan.TicksPerSecond / AverageFrameTime;
+                    CurrentSample = 0;
+                }
+            }
+
+            public float GetFps { get { return Fps; } }
         }
         #endregion
 
