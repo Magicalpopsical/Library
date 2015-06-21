@@ -1,0 +1,7 @@
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\CustomLibrary.dll
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\CustomLibrary.pdb
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\CustomLibrary.dll.CodeAnalysisLog.xml
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\bin\x86\Debug\CustomLibrary.dll.lastcodeanalysissucceeded
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\obj\x86\Debug\CustomLibrary.dll
+C:\Users\user\Google Drive\School\Computer Programming\Libraries\XNA\My_Own_Library\My_Own_Library\obj\x86\Debug\CustomLibrary.pdb

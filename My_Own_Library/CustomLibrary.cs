@@ -24,9 +24,9 @@ namespace Com.Magicalpopsical {
         public interface ISpriteBasedGame {
             void UpdateLives(int update);
             void UpdateScore(int update);
-            int GetScore();
+            int GetScore { get; }
             //GamePadState GetGamePad();
-            MouseState GetMouseState();
+            MouseState GetMouseState { get; }
             bool KeyPressed(Keys curKey);
             bool KeyReleased(Keys curKey);
             bool KeyHeld(Keys curKey);
@@ -39,7 +39,7 @@ namespace Com.Magicalpopsical {
         /// Defines a focusable object that the camera can focus on
         /// </summary>
         public interface IFocusable {
-            Vector2 GetPosition();
+            Vector2 GetPosition { get; }
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Com.Magicalpopsical {
             bool CheckAIMove(Rectangle original, Rectangle target);
             bool CheckAttack(Rectangle target);
             void AddAttack(int xMod, int yMod);
-        } 
+        }
         #endregion
 
         #region FPS
@@ -58,7 +58,7 @@ namespace Com.Magicalpopsical {
             static GameTime _gameTime;
             float Fps = 0f;
             private const int NumberSamples = 50;
-            int[] Samples = new int[NumberSamples];
+            int[] SampleS = new int[NumberSamples];
             int CurrentSample = 0, TicksAggregate = 0, SecondSinceStart = 0;
 
             public static GameTime GameTime { set { _gameTime = value; } get { return _gameTime; } }
@@ -72,14 +72,14 @@ namespace Com.Magicalpopsical {
             }
 
             public void DrawCall() {
-                Samples[CurrentSample++] = (int)_gameTime.ElapsedGameTime.Ticks;
+                SampleS[CurrentSample++] = (int)_gameTime.ElapsedGameTime.Ticks;
                 TicksAggregate += (int)_gameTime.ElapsedGameTime.Ticks;
                 if (TicksAggregate > TimeSpan.TicksPerSecond) {
                     TicksAggregate -= (int)TimeSpan.TicksPerSecond;
                     SecondSinceStart += 1;
                 }
                 if (CurrentSample == NumberSamples) {
-                    float AverageFrameTime = Sum(Samples) / NumberSamples;
+                    float AverageFrameTime = Sum(SampleS) / NumberSamples;
                     Fps = TimeSpan.TicksPerSecond / AverageFrameTime;
                     CurrentSample = 0;
                 }
@@ -92,7 +92,7 @@ namespace Com.Magicalpopsical {
                     return string.Format("FPS: {0}", Fps.ToString("000"));
                 }
             }
-        } 
+        }
         #endregion
 
         #region Camera
@@ -126,24 +126,27 @@ namespace Com.Magicalpopsical {
             }
 
             public void Update() {
-                pos = focus.GetPosition();
+                pos = focus.GetPosition;
             }
 
             public Matrix GetTransformation(GraphicsDevice graphicsDevice) {
-                transform = Matrix.CreateTranslation(new Vector3(-pos.X, -pos.Y, 0)) *
-                Matrix.CreateRotationZ(rotation) *
-                Matrix.CreateScale(new Vector3(zoom, zoom, 1)) *
-                Matrix.CreateTranslation(new Vector3(graphicsDevice.Viewport.Width * 0.5f, graphicsDevice.Viewport.Height * 0.5f, 0));
+                if (graphicsDevice != null) {
+                    transform = Matrix.CreateTranslation(new Vector3(-pos.X, -pos.Y, 0))
+                                * Matrix.CreateRotationZ(rotation)
+                                * Matrix.CreateScale(new Vector3(zoom, zoom, 1))
+                                * Matrix.CreateTranslation(new Vector3(graphicsDevice.Viewport.Width * 0.5f, graphicsDevice.Viewport.Height * 0.5f, 0));
 
-                return transform;
+                    return transform; 
+                }
+                return Matrix.Identity;
             }
-        }  
+        }
         #endregion
 
         #region TileMapping
         public class Tile {
             #region Fields
-            protected Texture2D spriteTexture;
+            private Texture2D spriteTexture;
             private Rectangle spriteRectangle;
             private static ContentManager content;
             #endregion
@@ -157,38 +160,44 @@ namespace Com.Magicalpopsical {
                 protected get { return content; }
                 set { content = value; }
             }
+            protected Texture2D SpriteTexture { get { return spriteTexture; } set { spriteTexture = value; } }
             #endregion
 
             public void Draw(SpriteBatch spriteBatch) {
-                spriteBatch.Draw(spriteTexture, spriteRectangle, Color.White);
+                if (spriteBatch != null) {
+                    spriteBatch.Draw(spriteTexture, spriteRectangle, Color.White);
+                }
             }
         }
 
         public class CollisionTile : Tile {
             public CollisionTile(string assetName, Rectangle inRectangle) {
-                spriteTexture = Content.Load<Texture2D>(assetName);
+                SpriteTexture = Content.Load<Texture2D>(assetName);
                 this.SpriteRectangle = inRectangle;
             }
         }
 
         public class TileMap : IMapControls {
             #region Fields
-            protected Color[,] colorData;
-            protected SpriteFont font;
-            protected int width, height, tileSize;
+            private Color[,] colorData;
+            private SpriteFont font;
+            private int width, height, tileSize;
             private static ContentManager content;
             int levelCounter = 0;
             #endregion
 
             #region Properties
-            public int Width { get { return width; } }
-            public int Height { get { return height; } }
-            public int TileSize { get { return tileSize; } }
+            public int Width { get { return width; } protected set { width = value; } }
+            public int Height { get { return height; } protected set { height = value; } }
+            public int TileSize { get { return tileSize; } protected set { tileSize = value; } }
             public static ContentManager Content {
                 protected get { return content; }
                 set { content = value; }
             }
             public virtual IFocusable GetFocus { get { return FocusObject; } }
+            protected Color[,] ColorData { get { return colorData; } set { colorData = value; } }
+            protected SpriteFont Font { get { return font; } set { font = value; } }
+
             #endregion
 
             #region Interfaces
@@ -347,12 +356,13 @@ namespace Com.Magicalpopsical {
         #region Sprites
         public class BaseSprite {
             #region Fields
-            protected Texture2D _spriteTexture;
-            protected Rectangle _spriteRectangle;
+            private Texture2D _spriteTexture;
+            private Rectangle _spriteRectangle;
             #endregion
 
             #region Properties
-            public Rectangle SpriteRectangle { get { return _spriteRectangle; } }
+            public Rectangle SpriteRectangle { get { return _spriteRectangle; } protected set { _spriteRectangle = value; } }
+            public Texture2D SpriteTexture { get { return _spriteTexture; } protected set { _spriteTexture = value; } }
             #endregion
 
             /// <summary>
@@ -400,7 +410,9 @@ namespace Com.Magicalpopsical {
             /// <param name="spriteBatch">The SpriteBatch to be used
             /// for the drawing operation.</param>
             public virtual void Draw(SpriteBatch spriteBatch) {
-                spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
+                if (spriteBatch != null) {
+                    spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White); 
+                }
             }
 
             /// <summary>
@@ -459,11 +471,12 @@ namespace Com.Magicalpopsical {
             public bool IsClickable { get { return Clickable; } }
             public Color HoverColor { get { return _HoverColor; } }
             public Color DefaultColor { get { return _DefaultColor; } }
-            protected MouseState MouseState { get { return game.GetMouseState(); } }
+            protected MouseState MouseState { get { return game.GetMouseState; } }
+            protected ISpriteBasedGame Game { get { return game; } set { game = value; } }
             #endregion
 
             #region Interfaces
-            protected ISpriteBasedGame game;
+            private ISpriteBasedGame game;
             #endregion
 
             public ButtonSprite(Texture2D inSpriteTexture, Rectangle inRectangle, Color inHoverColor, Color inDefaultColor, ISpriteBasedGame inGame, bool inClickable = true)
@@ -475,10 +488,10 @@ namespace Com.Magicalpopsical {
             }
 
             public bool IsHovering(Vector2 mousePosition) {
-                return (mousePosition.X >= _spriteRectangle.X &&
-                    mousePosition.Y >= _spriteRectangle.Y &&
-                    mousePosition.X <= _spriteRectangle.X + _spriteRectangle.Width &&
-                    mousePosition.Y <= _spriteRectangle.Y + _spriteRectangle.Height);
+                return (mousePosition.X >= SpriteRectangle.X &&
+                    mousePosition.Y >= SpriteRectangle.Y &&
+                    mousePosition.X <= SpriteRectangle.X + SpriteRectangle.Width &&
+                    mousePosition.Y <= SpriteRectangle.Y + SpriteRectangle.Height);
             }
 
             public bool IsHovering(MouseState inMouseState) {
@@ -490,20 +503,22 @@ namespace Com.Magicalpopsical {
             }
 
             public override void Draw(SpriteBatch spriteBatch) {
-                if (Clickable) {
-                    if (IsHovering()) {
-                        spriteBatch.Draw(_spriteTexture, _spriteRectangle, HoverColor);
+                if (spriteBatch != null) {
+                    if (Clickable) {
+                        if (IsHovering()) {
+                            spriteBatch.Draw(SpriteTexture, SpriteRectangle, HoverColor);
+                        }
+                        else {
+                            spriteBatch.Draw(SpriteTexture, SpriteRectangle, DefaultColor);
+                        }
                     }
                     else {
-                        spriteBatch.Draw(_spriteTexture, _spriteRectangle, DefaultColor);
-                    }
-                }
-                else {
-                    spriteBatch.Draw(_spriteTexture, _spriteRectangle, DefaultColor);
+                        spriteBatch.Draw(SpriteTexture, SpriteRectangle, DefaultColor);
+                    } 
                 }
             }
 
-            public virtual void Update() {
+            new public virtual void Update() {
 
             }
         }
@@ -516,7 +531,7 @@ namespace Com.Magicalpopsical {
 
             public override void Update() {
                 if (IsHovering() && MouseState.LeftButton == ButtonState.Pressed && IsClickable) {
-                    game.StartGame();
+                    Game.StartGame();
                 }
             }
         }
@@ -529,21 +544,29 @@ namespace Com.Magicalpopsical {
 
             public override void Update() {
                 if (IsHovering() && MouseState.LeftButton == ButtonState.Pressed && IsClickable) {
-                    game.ExitProgram();
+                    Game.ExitProgram();
                 }
             }
         }
 
         public class MovingSprite : BaseSprite {
             #region Fields
-            protected float x, y, xSpeed, ySpeed;
-            protected float initialX, initialY;
-            protected float minDisplayX, maxDisplayX, minDisplayY, maxDisplayY;
+            private float x, y, xSpeed, ySpeed;
+            private float initialX, initialY;
+            private float minDisplayX, maxDisplayX, minDisplayY, maxDisplayY;
             #endregion
 
             #region Properties
-            public float XPos { get { return x; } }
-            public float YPos { get { return y; } }
+            public float XPos { get { return x; } protected set { x = value; } }
+            public float YPos { get { return y; } protected set { y = value; } }
+            protected float XSpeed { get { return xSpeed; } }
+            protected float YSpeed { get { return ySpeed; } }
+            protected float InitialX { get { return initialX; } }
+            protected float InitialY { get { return initialY; } }
+            protected float MinDisplayX { get { return minDisplayX; } set { minDisplayX = value; } }
+            protected float MaxDisplayX { get { return maxDisplayX; } set { maxDisplayX = value; } }
+            protected float MinDisplayY { get { return minDisplayY; } set { minDisplayY = value; } }
+            protected float MaxDisplayY { get { return maxDisplayY; } set { maxDisplayY = value; } }
             #endregion
 
             /// <summary>
@@ -586,25 +609,28 @@ namespace Com.Magicalpopsical {
             /// <param name="initialY">start Y position for the sprite</param>
             public MovingSprite(Texture2D inSpriteTexture, float widthFactor, float ticksToCrossScreen, float inInitialX, float inInitialY, IDimensions inDimensions)
                 : base(inSpriteTexture, Rectangle.Empty) {
-                minDisplayX = inDimensions.MinDisplayX;
-                minDisplayY = inDimensions.MinDisplayY;
-                maxDisplayX = inDimensions.MaxDisplayX;
-                maxDisplayY = inDimensions.MaxDisplayY;
+                    if (inDimensions != null) {
+                        minDisplayX = inDimensions.MinDisplayX;
+                        minDisplayY = inDimensions.MinDisplayY;
+                        maxDisplayX = inDimensions.MaxDisplayX;
+                        maxDisplayY = inDimensions.MaxDisplayY;
 
-                initialX = inInitialX;
-                initialY = inInitialY;
+                        initialX = inInitialX;
+                        initialY = inInitialY;
 
-                float displayWidth = maxDisplayX - minDisplayX;
-
-                _spriteRectangle.Width = (int)((displayWidth * widthFactor) + 0.5f);
-                float aspectRatio =
-                    (float)_spriteTexture.Width / _spriteTexture.Height;
-                _spriteRectangle.Height =
-                    (int)((_spriteRectangle.Width / aspectRatio) + 0.5f);
-                x = initialX;
-                y = initialY;
-                xSpeed = displayWidth / ticksToCrossScreen;
-                ySpeed = xSpeed;
+                        float displayWidth = maxDisplayX - minDisplayX;
+                        Rectangle TempRectangle = SpriteRectangle;
+                        TempRectangle.Width = (int)((displayWidth * widthFactor) + 0.5f);
+                        float aspectRatio =
+                            (float)SpriteTexture.Width / SpriteTexture.Height;
+                        TempRectangle.Height =
+                            (int)((TempRectangle.Width / aspectRatio) + 0.5f);
+                        SpriteRectangle = TempRectangle;
+                        x = initialX;
+                        y = initialY;
+                        xSpeed = displayWidth / ticksToCrossScreen;
+                        ySpeed = xSpeed; 
+                    }
             }
 
             /// <summary>
@@ -613,7 +639,7 @@ namespace Com.Magicalpopsical {
             /// <param name="target">Rectangle giving the position of the other object.</param>
             /// <returns>true if the target has collided with this object</returns>
             public virtual bool CheckCollision(Rectangle target) {
-                return _spriteRectangle.Intersects(target);
+                return SpriteRectangle.Intersects(target);
             }
 
             public override void Draw(SpriteBatch spriteBatch) {
@@ -621,16 +647,20 @@ namespace Com.Magicalpopsical {
             }
 
             public override void Update(ISpriteBasedGame game) {
-                _spriteRectangle.X = (int)(x + 0.5f);
-                _spriteRectangle.Y = (int)(y + 0.5f);
+                Rectangle TempRectangle = SpriteRectangle;
+                TempRectangle.X = (int)(x + 0.5f);
+                TempRectangle.Y = (int)(y + 0.5f);
+                SpriteRectangle = TempRectangle;
                 base.Update(game);
             }
 
             public override void StartGame() {
                 x = initialX;
                 y = initialY;
-                _spriteRectangle.X = (int)x;
-                _spriteRectangle.Y = (int)y;
+                Rectangle TempRectangle = SpriteRectangle;
+                TempRectangle.X = (int)x;
+                TempRectangle.Y = (int)y;
+                SpriteRectangle = TempRectangle;
                 base.StartGame();
             }
         }
@@ -651,10 +681,10 @@ namespace Com.Magicalpopsical {
             private int frameHeight;
             /// <summary>
             /// Counts the updates
-            /// When it reaches 5 it is time to update the frames
+            /// When it reaches the updateClock it is time to update the frames
             /// </summary>
-            protected int updateTickCounter = 0;
-            protected int updateClock;
+            private int updateTickCounter = 0;
+            private int updateClock;
             /// <summary>
             /// Number of the row currently selected for the display
             /// </summary>
@@ -689,7 +719,9 @@ namespace Com.Magicalpopsical {
                 // We must use the aspect ratio of a frame in the animation
                 // to scale the sprite, not the size of all the frames
                 float aspectRatio = (float)frameWidth / frameHeight;
-                _spriteRectangle.Height = (int)((_spriteRectangle.Width / aspectRatio) + 0.5f);
+                Rectangle TempRectangle = SpriteRectangle;
+                TempRectangle.Height = (int)((SpriteRectangle.Width / aspectRatio) + 0.5f);
+                SpriteRectangle = TempRectangle;
             }
 
             public AnimatedSprite(Texture2D inSpriteTexture, float ticksToCrossScreen, float initialX, float initialY, int inFrameWidth, int inFrameHeight, int inUpdateClock = 5)
@@ -705,7 +737,7 @@ namespace Com.Magicalpopsical {
 
                 if (updateTickCounter == updateClock) {
                     updateTickCounter = 0;
-                    if (sourceRect.X + frameWidth >= _spriteTexture.Width) {
+                    if (sourceRect.X + frameWidth >= SpriteTexture.Width) {
                         // reset the animation to the start frame
                         sourceRect.X = 0;
                     }
@@ -727,7 +759,7 @@ namespace Com.Magicalpopsical {
             public bool SetRow(int newRowNumber) {
                 int rowY = newRowNumber * frameHeight;
 
-                if (rowY + frameHeight > _spriteTexture.Height) {
+                if (rowY + frameHeight > SpriteTexture.Height) {
                     // This row does not exist
                     return false;
                 }
@@ -738,19 +770,19 @@ namespace Com.Magicalpopsical {
             }
 
             public override void Draw(SpriteBatch spriteBatch) {
-                Draw(spriteBatch, _spriteRectangle);
+                Draw(spriteBatch, SpriteRectangle);
             }
 
             public void Draw(SpriteBatch spriteBatch, Rectangle inSpriteRectangle) {
-                spriteBatch.Draw(_spriteTexture, inSpriteRectangle, sourceRect, Color.White);
+                if (spriteBatch != null) {
+                    spriteBatch.Draw(SpriteTexture, inSpriteRectangle, sourceRect, Color.White); 
+                }
             }
 
             public void Draw(SpriteBatch spriteBatch, float inRotation, SpriteEffects spriteEffects) {
-                spriteBatch.Draw(_spriteTexture, _spriteRectangle, sourceRect, Color.White, inRotation, GetOrigin(), spriteEffects, 1);
-            }
-
-            private Vector2 GetOrigin(Rectangle inRectangle) {
-                return new Vector2(inRectangle.Width / 2, inRectangle.Height / 2);
+                if (spriteBatch != null) {
+                    spriteBatch.Draw(SpriteTexture, SpriteRectangle, sourceRect, Color.White, inRotation, GetOrigin(), spriteEffects, 1); 
+                }
             }
 
             private Vector2 GetOrigin() {
@@ -791,13 +823,15 @@ namespace Com.Magicalpopsical {
             /// <param name="inExplodeSound">sound to play when the sprite explodes</param>
             public ExplodingSprite(Texture2D inSpriteTexture, float widthFactor, float ticksToCrossScreen, float initialX, float initialY, int inFrameWidth, int inFrameHeight, Texture2D inExplodeTexture, int inExplodeFrameWidth, SoundEffect inExplodeSound, IDimensions inDimensions, int inUpdateClock = 5)
                 : base(inSpriteTexture, widthFactor, ticksToCrossScreen, initialX, initialY, inFrameWidth, inFrameHeight, inDimensions, inUpdateClock) {
-                explodeTexture = inExplodeTexture;
-                explodeFrameWidth = inExplodeFrameWidth;
-                explodeSourceRect = new Rectangle(
-                    0, 0,
-                    explodeFrameWidth,
-                    explodeTexture.Height);
-                explodeSound = inExplodeSound;
+                    if (inExplodeTexture != null) {
+                        explodeTexture = inExplodeTexture;
+                        explodeFrameWidth = inExplodeFrameWidth;
+                        explodeSourceRect = new Rectangle(
+                            0, 0,
+                            explodeFrameWidth,
+                            explodeTexture.Height);
+                        explodeSound = inExplodeSound; 
+                    }
             }
 
             public override void Update(ISpriteBasedGame game) {
@@ -826,8 +860,8 @@ namespace Com.Magicalpopsical {
 
             public override void Draw(SpriteBatch spriteBatch) {
                 base.Draw(spriteBatch);
-                if (exploding) {
-                    spriteBatch.Draw(explodeTexture, _spriteRectangle,
+                if (exploding && spriteBatch != null) {
+                    spriteBatch.Draw(explodeTexture, SpriteRectangle,
                                      explodeSourceRect, Color.White);
                 }
             }
