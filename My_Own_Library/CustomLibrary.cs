@@ -1,15 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 
-/// Version:1.1.3.0
+/// Version:1.1.4.0
 namespace Com.Magicalpopsical {
     namespace TwoD {
 
@@ -136,7 +141,7 @@ namespace Com.Magicalpopsical {
                                 * Matrix.CreateScale(new Vector3(zoom, zoom, 1))
                                 * Matrix.CreateTranslation(new Vector3(graphicsDevice.Viewport.Width * 0.5f, graphicsDevice.Viewport.Height * 0.5f, 0));
 
-                    return transform; 
+                    return transform;
                 }
                 return Matrix.Identity;
             }
@@ -411,7 +416,7 @@ namespace Com.Magicalpopsical {
             /// for the drawing operation.</param>
             public virtual void Draw(SpriteBatch spriteBatch) {
                 if (spriteBatch != null) {
-                    spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White); 
+                    spriteBatch.Draw(_spriteTexture, _spriteRectangle, Color.White);
                 }
             }
 
@@ -514,7 +519,7 @@ namespace Com.Magicalpopsical {
                     }
                     else {
                         spriteBatch.Draw(SpriteTexture, SpriteRectangle, DefaultColor);
-                    } 
+                    }
                 }
             }
 
@@ -609,28 +614,28 @@ namespace Com.Magicalpopsical {
             /// <param name="initialY">start Y position for the sprite</param>
             public MovingSprite(Texture2D inSpriteTexture, float widthFactor, float ticksToCrossScreen, float inInitialX, float inInitialY, IDimensions inDimensions)
                 : base(inSpriteTexture, Rectangle.Empty) {
-                    if (inDimensions != null) {
-                        minDisplayX = inDimensions.MinDisplayX;
-                        minDisplayY = inDimensions.MinDisplayY;
-                        maxDisplayX = inDimensions.MaxDisplayX;
-                        maxDisplayY = inDimensions.MaxDisplayY;
+                if (inDimensions != null) {
+                    minDisplayX = inDimensions.MinDisplayX;
+                    minDisplayY = inDimensions.MinDisplayY;
+                    maxDisplayX = inDimensions.MaxDisplayX;
+                    maxDisplayY = inDimensions.MaxDisplayY;
 
-                        initialX = inInitialX;
-                        initialY = inInitialY;
+                    initialX = inInitialX;
+                    initialY = inInitialY;
 
-                        float displayWidth = maxDisplayX - minDisplayX;
-                        Rectangle TempRectangle = SpriteRectangle;
-                        TempRectangle.Width = (int)((displayWidth * widthFactor) + 0.5f);
-                        float aspectRatio =
-                            (float)SpriteTexture.Width / SpriteTexture.Height;
-                        TempRectangle.Height =
-                            (int)((TempRectangle.Width / aspectRatio) + 0.5f);
-                        SpriteRectangle = TempRectangle;
-                        x = initialX;
-                        y = initialY;
-                        xSpeed = displayWidth / ticksToCrossScreen;
-                        ySpeed = xSpeed; 
-                    }
+                    float displayWidth = maxDisplayX - minDisplayX;
+                    Rectangle TempRectangle = SpriteRectangle;
+                    TempRectangle.Width = (int)((displayWidth * widthFactor) + 0.5f);
+                    float aspectRatio =
+                        (float)SpriteTexture.Width / SpriteTexture.Height;
+                    TempRectangle.Height =
+                        (int)((TempRectangle.Width / aspectRatio) + 0.5f);
+                    SpriteRectangle = TempRectangle;
+                    x = initialX;
+                    y = initialY;
+                    xSpeed = displayWidth / ticksToCrossScreen;
+                    ySpeed = xSpeed;
+                }
             }
 
             /// <summary>
@@ -775,13 +780,13 @@ namespace Com.Magicalpopsical {
 
             public void Draw(SpriteBatch spriteBatch, Rectangle inSpriteRectangle) {
                 if (spriteBatch != null) {
-                    spriteBatch.Draw(SpriteTexture, inSpriteRectangle, sourceRect, Color.White); 
+                    spriteBatch.Draw(SpriteTexture, inSpriteRectangle, sourceRect, Color.White);
                 }
             }
 
             public void Draw(SpriteBatch spriteBatch, float inRotation, SpriteEffects spriteEffects) {
                 if (spriteBatch != null) {
-                    spriteBatch.Draw(SpriteTexture, SpriteRectangle, sourceRect, Color.White, inRotation, GetOrigin(), spriteEffects, 1); 
+                    spriteBatch.Draw(SpriteTexture, SpriteRectangle, sourceRect, Color.White, inRotation, GetOrigin(), spriteEffects, 1);
                 }
             }
 
@@ -823,15 +828,15 @@ namespace Com.Magicalpopsical {
             /// <param name="inExplodeSound">sound to play when the sprite explodes</param>
             public ExplodingSprite(Texture2D inSpriteTexture, float widthFactor, float ticksToCrossScreen, float initialX, float initialY, int inFrameWidth, int inFrameHeight, Texture2D inExplodeTexture, int inExplodeFrameWidth, SoundEffect inExplodeSound, IDimensions inDimensions, int inUpdateClock = 5)
                 : base(inSpriteTexture, widthFactor, ticksToCrossScreen, initialX, initialY, inFrameWidth, inFrameHeight, inDimensions, inUpdateClock) {
-                    if (inExplodeTexture != null) {
-                        explodeTexture = inExplodeTexture;
-                        explodeFrameWidth = inExplodeFrameWidth;
-                        explodeSourceRect = new Rectangle(
-                            0, 0,
-                            explodeFrameWidth,
-                            explodeTexture.Height);
-                        explodeSound = inExplodeSound; 
-                    }
+                if (inExplodeTexture != null) {
+                    explodeTexture = inExplodeTexture;
+                    explodeFrameWidth = inExplodeFrameWidth;
+                    explodeSourceRect = new Rectangle(
+                        0, 0,
+                        explodeFrameWidth,
+                        explodeTexture.Height);
+                    explodeSound = inExplodeSound;
+                }
             }
 
             public override void Update(ISpriteBasedGame game) {
@@ -884,5 +889,191 @@ namespace Com.Magicalpopsical {
             }
         }
         #endregion
+    }
+}
+
+namespace Ini {
+    /// <summary>
+    /// Creates a New INI file to store or load data
+    /// </summary>
+    public class IniFile {
+        public string path;
+
+        [DllImport("kernel32")]
+        private static extern long WritePrivateProfileString(string section, string key, string val, string filePath);
+        [DllImport("kernel32")]
+        private static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder retVal, int size, string filePath);
+
+        /// <summary>
+        /// INIFile Constructor
+        /// </summary>
+        /// <param name="INIPath"></param>
+        public IniFile(string INIPath) {
+            path = INIPath;
+        }
+
+        /// <summary>
+        /// Write Data to the INI File
+        /// </summary>
+        /// <param name="Section">Section Name</param>
+        /// <param name="Key">Key Name</param>
+        /// <param name="Value">Value Name</param>
+        public void IniWriteValue(string Section, string Key, string Value) {
+            WritePrivateProfileString(Section, Key, Value, this.path);
+        }
+
+        /// <summary>
+        /// Read Data Value from the INI File
+        /// </summary>
+        /// <param name="Section"></param>
+        /// <param name="Key"></param>
+        /// <returns></returns>
+        public string IniReadValue(string Section, string Key) {
+            StringBuilder temp = new StringBuilder(255);
+            int i = GetPrivateProfileString(Section, Key, "", temp, 255, this.path);
+            return temp.ToString();
+        }
+    }
+
+    public static class GameSettings {
+        struct setting {
+            public object fileName;
+            public string name;
+
+            public object actualValue;
+            public object defaultValue;
+
+            public ValidatorDelegate validate;
+            public SaveFormatDelegate saveFormat;
+        }
+
+        public delegate object ValidatorDelegate(string readValue);
+        public delegate string SaveFormatDelegate(object readValue);
+
+        public static class HadesGameSettings {
+            struct setting {
+                public object fileName;
+                public string name;
+
+                public object actualValue;
+                public object defaultValue;
+
+                public ValidatorDelegate validate;
+                public SaveFormatDelegate saveFormat;
+            }
+
+            const string settingsDirectory = "Settings";
+            const string configSuffix = ".ini";
+
+            static Dictionary<string, setting> settings =
+                new Dictionary<string, setting>();
+            public static string SettingsDirectory() { return Environment.CurrentDirectory + Path.DirectorySeparatorChar + settingsDirectory + Path.DirectorySeparatorChar; }
+
+            public static void registerSetting(string file, string name, object defaultValue, ValidatorDelegate validator, SaveFormatDelegate saveFormat) {
+                IniFile f;
+                setting v = new setting();
+
+                if (!Directory.Exists(SettingsDirectory()))
+                    Directory.CreateDirectory(SettingsDirectory());
+
+                string[] taxonomy = name.Split(".".ToCharArray(), 2);
+
+                Debug.Assert(taxonomy.Length == 2, "Taxonomy must include at least one dot character [.]");
+
+                v.name = name;
+                v.fileName = file;
+
+                v.validate = validator;
+                v.saveFormat = saveFormat;
+
+                v.defaultValue = defaultValue;
+
+                f = new IniFile(SettingsDirectory() + v.fileName + configSuffix);
+                v.actualValue = validator(f.IniReadValue(taxonomy[0], taxonomy[1]));
+
+                settings.Add(name, v);
+            }
+
+            internal static void saveSettings() {
+                foreach (setting v in settings.Values) {
+                    Save(v);
+                }
+            }
+
+            private static void Save(setting v) {
+                IniFile f = new IniFile(SettingsDirectory() + v.fileName + configSuffix);
+
+                string[] taxonomy = v.name.Split(".".ToCharArray(), 2);
+
+                f.IniWriteValue(taxonomy[0], taxonomy[1], v.saveFormat(v.actualValue));
+            }
+
+            public static string getString(string p) {
+                return (string)settings[p].actualValue;
+            }
+
+            public static string getStringDef(string p) {
+                return (string)settings[p].defaultValue;
+            }
+
+            public static bool getBool(string p) {
+                return (bool)settings[p].actualValue;
+            }
+
+            public static bool getBoolDef(string p) {
+                return (bool)settings[p].defaultValue;
+            }
+
+            public static int getInt(string p) {
+                return (int)settings[p].actualValue;
+            }
+
+            public static int getIntDef(string p) {
+                return (int)settings[p].defaultValue;
+            }
+
+            public static float getFloat(string p) {
+                return (float)settings[p].actualValue;
+            }
+
+            public static float getFloatDef(string p) {
+                return (float)settings[p].defaultValue;
+            }
+
+            public static string SaveFormatStd(object var) {
+                return var.ToString();
+            }
+
+            public static object ValidateString(string var) {
+                return var;
+            }
+
+            public static object ValidateFloat(string var) {
+                float result = 0;
+
+                if (!float.TryParse(var, out result))
+                    return 0;
+
+                return result;
+            }
+
+            public static object ValidateBool(string var) {
+                bool result = true;
+
+                if (!bool.TryParse(var, out result))
+                    return 0;
+
+                return result;
+            }
+
+            public static object ValidateInt(string var) {
+                int result = 0;
+
+                if (!int.TryParse(var, out result))
+                    return 0;
+
+                return result;
+            }
+        }
     }
 }
