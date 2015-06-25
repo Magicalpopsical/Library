@@ -14,7 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-/// Version:1.1.4.0
+/// Version:1.1.4.2
 namespace Com.Magicalpopsical {
     namespace TwoD {
 
@@ -994,7 +994,7 @@ namespace Ini {
             settings.Add(name, v);
         }
 
-        internal static void saveSettings() {
+        public static void saveSettings() {
             foreach (setting v in settings.Values) {
                 Save(v);
             }
