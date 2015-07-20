@@ -14,7 +14,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-/// Version:1.1.4.2
+/// Version:1.1.5.1
 namespace Com.Magicalpopsical {
     namespace TwoD {
 
@@ -430,14 +430,6 @@ namespace Com.Magicalpopsical {
         }
 
         public class TitleSprite : BaseSprite {
-            #region Fields
-            List<ButtonSprite> ButtonList = new List<ButtonSprite>();
-            #endregion
-
-            #region Properties
-            public List<ButtonSprite> GetButtonList { get { return ButtonList; } }
-            #endregion
-
             public TitleSprite(Texture2D inSpriteTexture, Rectangle inRectangle)
                 : base(inSpriteTexture, inRectangle) {
             }
@@ -448,110 +440,10 @@ namespace Com.Magicalpopsical {
 
             }
 
-            public void Update() {
-                foreach (var button in ButtonList) {
-                    button.Update();
-                }
-            }
-
             public override void Draw(SpriteBatch spriteBatch) {
                 base.Draw(spriteBatch);
-                foreach (var button in ButtonList) {
-                    button.Draw(spriteBatch);
-                }
             }
 
-            public void AddButton(ButtonSprite newButton) {
-                ButtonList.Add(newButton);
-            }
-        }
-
-        public class ButtonSprite : TitleSprite {
-            #region Fields
-            bool Clickable;
-            Color _HoverColor, _DefaultColor;
-            #endregion
-
-            #region Properties
-            public bool IsClickable { get { return Clickable; } }
-            public Color HoverColor { get { return _HoverColor; } }
-            public Color DefaultColor { get { return _DefaultColor; } }
-            protected MouseState MouseState { get { return game.GetMouseState; } }
-            protected ISpriteBasedGame Game { get { return game; } set { game = value; } }
-            #endregion
-
-            #region Interfaces
-            private ISpriteBasedGame game;
-            #endregion
-
-            public ButtonSprite(Texture2D inSpriteTexture, Rectangle inRectangle, Color inHoverColor, Color inDefaultColor, ISpriteBasedGame inGame, bool inClickable = true)
-                : base(inSpriteTexture, inRectangle) {
-                Clickable = inClickable;
-                _HoverColor = inHoverColor;
-                _DefaultColor = inDefaultColor;
-                game = inGame;
-            }
-
-            public bool IsHovering(Vector2 mousePosition) {
-                return (mousePosition.X >= SpriteRectangle.X &&
-                    mousePosition.Y >= SpriteRectangle.Y &&
-                    mousePosition.X <= SpriteRectangle.X + SpriteRectangle.Width &&
-                    mousePosition.Y <= SpriteRectangle.Y + SpriteRectangle.Height);
-            }
-
-            public bool IsHovering(MouseState inMouseState) {
-                return (IsHovering(new Vector2(inMouseState.X, inMouseState.Y)));
-            }
-
-            public bool IsHovering() {
-                return (IsHovering(MouseState));
-            }
-
-            public override void Draw(SpriteBatch spriteBatch) {
-                if (spriteBatch != null) {
-                    if (Clickable) {
-                        if (IsHovering()) {
-                            spriteBatch.Draw(SpriteTexture, SpriteRectangle, HoverColor);
-                        }
-                        else {
-                            spriteBatch.Draw(SpriteTexture, SpriteRectangle, DefaultColor);
-                        }
-                    }
-                    else {
-                        spriteBatch.Draw(SpriteTexture, SpriteRectangle, DefaultColor);
-                    }
-                }
-            }
-
-            new public virtual void Update() {
-
-            }
-        }
-
-        public class StartButton : ButtonSprite {
-            public StartButton(Texture2D inSpriteTexture, Rectangle inRectangle, Color inHoverColor, Color inDefaultColor, ISpriteBasedGame inGame, bool inClickable = true)
-                : base(inSpriteTexture, inRectangle, inHoverColor, inDefaultColor, inGame, inClickable) {
-
-            }
-
-            public override void Update() {
-                if (IsHovering() && MouseState.LeftButton == ButtonState.Pressed && IsClickable) {
-                    Game.StartGame();
-                }
-            }
-        }
-
-        public class ExitButton : ButtonSprite {
-            public ExitButton(Texture2D inSpriteTexture, Rectangle inRectangle, Color inHoverColor, Color inDefaultColor, ISpriteBasedGame inGame, bool inClickable = true)
-                : base(inSpriteTexture, inRectangle, inHoverColor, inDefaultColor, inGame, inClickable) {
-
-            }
-
-            public override void Update() {
-                if (IsHovering() && MouseState.LeftButton == ButtonState.Pressed && IsClickable) {
-                    Game.ExitProgram();
-                }
-            }
         }
 
         public class MovingSprite : BaseSprite {
@@ -892,6 +784,173 @@ namespace Com.Magicalpopsical {
     }
 }
 
+namespace Menu {
+    public class MainMenu {
+        public delegate void ClickActions();
+        public delegate void Click_MenuChoose(string p);
+
+        #region Other Classes
+        class cMenu {
+            List<cMenuObject> MenuObjects = new List<cMenuObject>();
+
+            public void Update(MouseState inMouse) {
+                foreach (var val in MenuObjects) {
+                    val.Update(inMouse);
+                }
+            }
+
+            public void Draw(SpriteBatch spriteBatch) {
+                foreach (cButton val in MenuObjects) {
+                    val.Draw(spriteBatch);
+                }
+            }
+
+            public void AddObject(cMenuObject val) {
+                MenuObjects.Add(val);
+            }
+        }
+
+        public class cMenuObject {
+            public virtual void Update(MouseState inMouse) {
+
+            }
+
+            public virtual void Draw(SpriteBatch spriteBatch) {
+
+            }
+        }
+
+        public class cText : cMenuObject {
+            string text;
+            Vector2 location;
+            SpriteFont font;
+            Color c_text;
+
+            public cText(string inText, Vector2 inLocation, SpriteFont inFont) {
+                text = inText;
+                location = inLocation;
+                font = inFont;
+                c_text = Color.White;
+            }
+
+            public cText(string inText, Vector2 inLocation, SpriteFont inFont, Color inColor) {
+                text = inText;
+                location = inLocation;
+                font = inFont;
+                c_text = inColor;
+            }
+
+            public override void Draw(SpriteBatch spriteBatch) {
+                spriteBatch.DrawString(font, text, location, c_text);
+            }
+        }
+
+        public class cButton : cMenuObject {
+            bool Clickable, Hover;
+            Color HoverColor, DefaultColor;
+            ClickActions ClickActions;
+            Click_MenuChoose ChooseMenu;
+            string p_Menu;
+            Texture2D SpriteTexture;
+            Rectangle SpriteRectangle;
+
+            public bool IsClickable { get { return Clickable; } }
+            public bool IsHovering { get { return Hover; } }
+
+            public cButton(Texture2D inSpriteTexture, Rectangle inSpriteRectangle, Color inHover, Color inDefault, ClickActions inClickActions, Click_MenuChoose inChooseMenu = null, string inMenu = null, bool inClickable = true) {
+                SpriteTexture = inSpriteTexture;
+                SpriteRectangle = inSpriteRectangle;
+                HoverColor = inHover;
+                DefaultColor = inDefault;
+                Clickable = inClickable;
+                ClickActions = inClickActions;
+                ChooseMenu = inChooseMenu;
+                p_Menu = inMenu;
+            }
+
+            public override void Update(MouseState inMouse) {
+                Rectangle Mouse = new Rectangle(inMouse.X, inMouse.Y, 1, 1);
+                if (Mouse.Intersects(SpriteRectangle)) {
+                    Hover = true;
+                    if (Clickable && inMouse.LeftButton == ButtonState.Pressed) {
+                        if (ClickActions != null) {
+                            ClickActions();
+                        }
+                        if (ChooseMenu != null && p_Menu != null) {
+                            ChooseMenu(p_Menu);
+                        }
+                    }
+                }
+                else {
+                    Hover = false;
+                }
+            }
+
+            public override void Draw(SpriteBatch spriteBatch) {
+                if (spriteBatch != null) {
+                    if (IsClickable && IsHovering) {
+                        spriteBatch.Draw(SpriteTexture, SpriteRectangle, HoverColor);
+                    }
+                    else {
+                        spriteBatch.Draw(SpriteTexture, SpriteRectangle, DefaultColor);
+                    }
+                }
+            }
+        }
+
+        public class cPicture : cMenuObject {
+            Texture2D SpriteTexture;
+            Rectangle SpriteRectangle;
+            Color c_picture;
+
+            public cPicture(Texture2D inSpriteTexture, Rectangle inSpriteRectangle) {
+                SpriteTexture = inSpriteTexture;
+                SpriteRectangle = inSpriteRectangle;
+                c_picture = Color.White;
+            }
+
+            public cPicture(Texture2D inSpriteTexture, Rectangle inSpriteRectangle, Color inColor) {
+                SpriteTexture = inSpriteTexture;
+                SpriteRectangle = inSpriteRectangle;
+                c_picture = inColor;
+            }
+
+            public override void Draw(SpriteBatch spriteBatch) {
+                spriteBatch.Draw(SpriteTexture, SpriteRectangle, c_picture);
+            }
+        }
+        #endregion
+
+        Dictionary<string, cMenu> AllMenus = new Dictionary<string, cMenu>();
+        cMenu CurrentMenu;
+
+        public MainMenu() {
+            AllMenus.Add("Main", new cMenu());
+            CurrentMenu = AllMenus["Main"];
+        }
+
+        public void AddMenu(string p) {
+            AllMenus.Add(p, new cMenu());
+        }
+
+        public void AddMenuObject(string p, cMenuObject val) {
+            AllMenus[p].AddObject(val);
+        }
+
+        public void Update(MouseState inMouse) {
+            CurrentMenu.Update(inMouse);
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            CurrentMenu.Draw(spriteBatch);
+        }
+
+        public void ChooseMenu(string p) {
+            CurrentMenu = AllMenus[p];
+        }
+    }
+}
+
 namespace Ini {
     /// <summary>
     /// Creates a New INI file to store or load data
@@ -936,20 +995,8 @@ namespace Ini {
     }
 
     public static class GameSettings {
-        struct setting {
-            public object fileName;
-            public string name;
-
-            public object actualValue;
-            public object defaultValue;
-
-            public ValidatorDelegate validate;
-            public SaveFormatDelegate saveFormat;
-        }
-
         public delegate object ValidatorDelegate(string readValue);
         public delegate string SaveFormatDelegate(object readValue);
-
 
         struct setting {
             public object fileName;
@@ -1073,6 +1120,13 @@ namespace Ini {
                 return 0;
 
             return result;
+        }
+
+        public static void UpdateSettingValue(string p, object val) {
+            setting v = settings[p];
+            v.actualValue = v.validate(val.ToString());
+            settings.Remove(p);
+            settings.Add(p, v);
         }
     }
 }
